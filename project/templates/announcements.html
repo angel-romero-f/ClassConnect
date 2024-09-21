@@ -1,1 +1,25 @@
 {% extends "base.html" %}
+{% block content %}
+<div class="custom_container">
+    <h1 class = "h1_custom"><span id="announcements-nom">2</span> Announcements</h1>
+    <div class="announcements">
+        <div id="announcement-item" class="announcement-item">
+            <h2>We have a test on Tuesday! Study your times tables!</h2>
+            <div class="dots">
+                <p>...</p>
+            </div>
+            <div class="avatar-info">
+                <img src="https://core-docs.s3.amazonaws.com/murray_county_central_schools_ar/article/image/large_66f00638-2227-4795-84cc-8cefe4e4fb75.png" alt="">
+                <div class="avatar-name">Algebra Test!</div>
+            </div>
+            <div class="announcements-time">2 hours ago</div>
+        </div>
+    </div>
+
+    <button id="dismiss-all-btn">Dismiss All</button>
+    <button id="reset-btn">Reset</button>
+</div>
+
+<!-- Include your JavaScript file -->
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+{% endblock %}
