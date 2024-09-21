@@ -7,10 +7,10 @@ class User(db.Model):
     name = db.Column(db.String(1000))
 
 class Parent(User):
-    child_name = db.Column(db.string(100))
+    child_name = db.Column(db.String(100))
 
 class Student(User):
-    grade_level = db.Column(db.string(100))
+    grade_level = db.Column(db.String(100))
 
 class Teacher(User):
     subject = db.Column(db.String(100))
