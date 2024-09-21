@@ -10,15 +10,14 @@ class User(UserMixin, db.Model):
     name = db.Column(db.String(1000))
     role = db.Column(db.String(50))
 
-# class Class(db.Model):
-#     #model representing a class with the name of the class, announcements, teacher, and students associated with the class
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(100))
-#     teacher_id = db.Column(db.Integer, db.ForeignKey('teachers.id'))
-#     #establishes relationships between classes and other models
-#     teacher = db.relationship('Teacher', back_populates='classes')
-#     enrollments = db.relationship('Enrollment', back_populates='class_')
-#     announcements = db.relationship('Announcement', back_populates='class_')
+class Class(db.Model):
+    #model representing a class with the name of the class, announcements, teacher, and students associated with the class
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    teacher_id = db.Column(db.Integer)
+    teacher = db.Column(db.String(100))
+    #establishes relationships between classes and other models
+
 
 # class Enrollment(db.Model):
 #     #model with student, class their enrolled in, and their corresponding ids
