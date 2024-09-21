@@ -1,6 +1,11 @@
 from . import db
 from flask_login import UserMixin
+from flask_security import RoleMixin
 from datetime import datetime
+
+roles_users = db.Table('roles_users',
+        db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+        db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
 class User(UserMixin, db.Model):
     #general user table with email, password, name, and user role
@@ -8,7 +13,8 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
-    role = db.Column(db.String(50))
+    roles = db.relationship('Role', secondary=roles_users, backref='roled')
+    fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False)
 
 class Class(db.Model):
     #model representing a class with the name of the class, announcements, teacher, and students associated with the class
@@ -18,6 +24,10 @@ class Class(db.Model):
     teacher = db.Column(db.String(100))
     #establishes relationships between classes and other models
 
+class Role(db.Model, RoleMixin):
+    __tablename__ = 'role'
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(80), unique=True)
 
 # class Enrollment(db.Model):
 #     #model with student, class their enrolled in, and their corresponding ids

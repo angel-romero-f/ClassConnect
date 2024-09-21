@@ -60,7 +60,7 @@ def signup_post():
     # else:
     #     flash('Invalid role selected. Please try again.')
     #     return redirect(url_for('auth.signup'))
-    new_user = User(email=email, name=name, password=hashed_password)
+    new_user = User(email=email, name=name, password=hashed_password, fs_uniquifier=email)
     # Add the new user to the database
     db.session.add(new_user)
     db.session.commit()
