@@ -39,7 +39,7 @@ def signup_post():
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
-    role = request.form.get('role')  # Get the selected role from the form
+    #role = request.form.get('role')  # Get the selected role from the form
 
     # Check if the email already exists in the database
     user = User.query.filter_by(email=email).first()
@@ -51,16 +51,16 @@ def signup_post():
     hashed_password = generate_password_hash(password, "pbkdf2")
 
     # Create the appropriate user based on their role
-    if role == 'student':
-        new_user = Student(email=email, name=name, password=hashed_password)
-    elif role == 'parent':
-        new_user = Parent(email=email, name=name, password=hashed_password)
-    elif role == 'teacher':
-        new_user = Teacher(email=email, name=name, password=hashed_password)
-    else:
-        flash('Invalid role selected. Please try again.')
-        return redirect(url_for('auth.signup'))
-
+    # if role == 'student':
+    #     new_user = Student(email=email, name=name, password=hashed_password)
+    # elif role == 'parent':
+    #     new_user = Parent(email=email, name=name, password=hashed_password)
+    # elif role == 'teacher':
+    #     new_user = Teacher(email=email, name=name, password=hashed_password)
+    # else:
+    #     flash('Invalid role selected. Please try again.')
+    #     return redirect(url_for('auth.signup'))
+    new_user = User(email=email, name=name, password=hashed_password)
     # Add the new user to the database
     db.session.add(new_user)
     db.session.commit()
