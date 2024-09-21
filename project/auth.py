@@ -26,7 +26,15 @@ def login_post():
 
     # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember)
-    return redirect(url_for('main.profile'))
+
+    if Parent.query.filter_by(id=user.id).first():
+        return redirect(url_for('main.parent_dashboard'))
+    elif Student.query.filter_by(id=user.id).first():
+        return redirect(url_for('main.student_dashboard'))
+    elif Teacher.query.filter_by(id=user.id).first():
+        return redirect(url_for('main.teacher_dashboard'))
+    else:
+        return redirect(url_for('main.profile'))
 
 @auth.route('/signup')
 def signup():
@@ -34,25 +42,38 @@ def signup():
 
 @auth.route('/signup', methods=['POST'])
 def signup_post():
-    # Gathers info from the User
+    # Gathers info from the form
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
+    role = request.form.get('role')  # Get the selected role from the form
 
-    user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
-
-    if user: # if a user is found, we want to redirect back to signup page so user can try again
+    # Check if the email already exists in the database
+    user = User.query.filter_by(email=email).first()
+    if user:
         flash('Email address already exists')
         return redirect(url_for('auth.signup'))
 
-    # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-    new_user = User(email=email, name=name, password=generate_password_hash(password, "pbkdf2"))
+    # Hash the password
+    hashed_password = generate_password_hash(password, "pbkdf2")
 
-    # add the new user to the database
+    # Create the appropriate user based on their role
+    if role == 'student':
+        new_user = Student(email=email, name=name, password=hashed_password)
+    elif role == 'parent':
+        new_user = Parent(email=email, name=name, password=hashed_password)
+    elif role == 'teacher':
+        new_user = Teacher(email=email, name=name, password=hashed_password)
+    else:
+        flash('Invalid role selected. Please try again.')
+        return redirect(url_for('auth.signup'))
+
+    # Add the new user to the database
     db.session.add(new_user)
     db.session.commit()
 
     return redirect(url_for('auth.login'))
+
 
 @auth.route('/logout')
 @login_required
