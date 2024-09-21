@@ -1,0 +1,14 @@
+/* Custom Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* This font is close to what Notion uses */
+    background-color: #ffffff; /* White background */
+  }
+  
+  h1, h2 {
+    color: #000000; /* Black text */
+  }
+  
+  .container {
+    max-width: 960px; /* Centered container with a max-width */
+  }
+  
