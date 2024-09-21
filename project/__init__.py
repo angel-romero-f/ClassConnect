@@ -28,8 +28,12 @@ def create_app():
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
-    # blueprint for non-auth parts of app
+    # blueprint for main parts of app
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
+    # blueprint for non-auth parts of app
+    from .nonauth import nonauth as nonauth_blueprint
+    app.register_blueprint(nonauth_blueprint)
+    
     return app
