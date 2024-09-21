@@ -1,10 +1,23 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h1  style="font-size: 60px; font-weight: 520;">Stay Connected with Your Child's Classroom</h1>
+      <h4>
+        ClassConnect helps teachers, students, and parents stay connected
+        outside of the classroom.
+      </h4>
 
-{% block content %}
-<h1 class="title">
-  Flask Login Example
-</h1>
-<h2 class="subtitle">
-  Easy authentication and authorization in Flask.
-</h2>
+      <a href="{{ url_for('auth.signup') }}" class="btn btn-primary">Sign Up</a>
+      <a href="{{ url_for('auth.login') }}" class="btn btn-outline-primary ml-2">Login</a>      
+    </div>
+    <div class="col-md-6">
+      <img
+        src="https://assets.pokemon.com/assets/cms2/img/pokedex/full//393.png"
+        alt="Descriptive Image Text"
+        class="img-fluid"
+      />
+    </div>
+  </div>
+</div>
 {% endblock %}
