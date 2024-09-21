@@ -8,6 +8,7 @@ def create_app():
 
     app.config['SECRET_KEY'] = 'put some secret key'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+    from .models import User
 
     db.init_app(app)
     with app.app_context():
@@ -17,7 +18,6 @@ def create_app():
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
-    from .models import User
 
     @login_manager.user_loader
     def load_user(user_id):
