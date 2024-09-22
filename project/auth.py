@@ -6,11 +6,11 @@ from . import db
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/login')
+@auth.route('/user_login')
 def login():
     return render_template('login.html')
 
-@auth.route('/login', methods=['POST'])
+@auth.route('/user_login', methods=['POST'])
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
@@ -39,6 +39,7 @@ def signup_post():
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
+    role = request.form.get('role')
     #role = request.form.get('role')  # Get the selected role from the form
 
     # Check if the email already exists in the database
@@ -49,18 +50,7 @@ def signup_post():
 
     # Hash the password
     hashed_password = generate_password_hash(password, "pbkdf2")
-
-    # Create the appropriate user based on their role
-    # if role == 'student':
-    #     new_user = Student(email=email, name=name, password=hashed_password)
-    # elif role == 'parent':
-    #     new_user = Parent(email=email, name=name, password=hashed_password)
-    # elif role == 'teacher':
-    #     new_user = Teacher(email=email, name=name, password=hashed_password)
-    # else:
-    #     flash('Invalid role selected. Please try again.')
-    #     return redirect(url_for('auth.signup'))
-    new_user = User(email=email, name=name, password=hashed_password, fs_uniquifier=email)
+    new_user = User(email=email, name=name, password=hashed_password, fs_uniquifier=email,active=True, roles = role)
     # Add the new user to the database
     db.session.add(new_user)
     db.session.commit()
