@@ -1,23 +1,48 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="custom_container">
-    <h1 class = "h1_custom"><span id="announcements-nom">2</span> Announcements</h1>
-    <div class="announcements">
-        <div id="announcement-item" class="announcement-item">
-            <h2>We have a test on Tuesday! Study your times tables!</h2>
-            <div class="dots">
-                <p>...</p>
+    <h1 class="h1_custom">Announcements</h1>
+    <div class="announcements-container">
+        <!-- Class Announcements Bar -->
+        <div class="announcements-bar">
+            <h2>Class Announcements</h2>
+            <div class="announcements">
+                {% for announcement in class_announcements %}
+                <div class="announcement-item">
+                    <h3>{{ announcement.title }}</h3>
+                    <p>{{ announcement.content }}</p>
+                    <div class="announcement-info">
+                        <div class="avatar-info">
+                            <img src="{{ announcement.teacher_image_url }}" alt="Teacher Image">
+                            <div class="avatar-name">{{ announcement.teacher_name }}</div>
+                        </div>
+                        <div class="announcements-time">{{ announcement.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            <div class="avatar-info">
-                <img src="https://core-docs.s3.amazonaws.com/murray_county_central_schools_ar/article/image/large_66f00638-2227-4795-84cc-8cefe4e4fb75.png" alt="">
-                <div class="avatar-name">Algebra Test!</div>
+        </div>
+
+        <!-- General Announcements Bar -->
+        <div class="announcements-bar">
+            <h2>General Announcements</h2>
+            <div class="announcements">
+                {% for announcement in general_announcements %}
+                <div class="announcement-item">
+                    <h3>{{ announcement.title }}</h3>
+                    <p>{{ announcement.content }}</p>
+                    <div class="announcement-info">
+                        <div class="avatar-info">
+                            <img src="{{ announcement.author_image_url }}" alt="Author Image">
+                            <div class="avatar-name">{{ announcement.author_name }}</div>
+                        </div>
+                        <div class="announcements-time">{{ announcement.created_at.strftime('%Y-%m-%d %H:%M') }}</div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            <div class="announcements-time">2 hours ago</div>
         </div>
     </div>
-
-    <button id="dismiss-all-btn">Dismiss All</button>
-    <button id="reset-btn">Reset</button>
 </div>
 
 <!-- Include your JavaScript file -->
