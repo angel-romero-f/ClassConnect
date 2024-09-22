@@ -49,18 +49,7 @@ def signup_post():
 
     # Hash the password
     hashed_password = generate_password_hash(password, "pbkdf2")
-
-    # Create the appropriate user based on their role
-    # if role == 'student':
-    #     new_user = Student(email=email, name=name, password=hashed_password)
-    # elif role == 'parent':
-    #     new_user = Parent(email=email, name=name, password=hashed_password)
-    # elif role == 'teacher':
-    #     new_user = Teacher(email=email, name=name, password=hashed_password)
-    # else:
-    #     flash('Invalid role selected. Please try again.')
-    #     return redirect(url_for('auth.signup'))
-    new_user = User(email=email, name=name, password=hashed_password, fs_uniquifier=email)
+    new_user = User(email=email, name=name, password=hashed_password, fs_uniquifier=email,active=True)
     # Add the new user to the database
     db.session.add(new_user)
     db.session.commit()
