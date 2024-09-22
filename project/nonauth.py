@@ -8,6 +8,7 @@ from .models import Class
 nonauth = Blueprint('nonauth', __name__)
 
 @nonauth.route('/home')
+@login_required
 def home():
     return render_template('home.html')
 
