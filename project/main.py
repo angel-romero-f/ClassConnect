@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_required, current_user
 from . import db
 
@@ -6,7 +6,10 @@ main = Blueprint('main', __name__)
 
 @main.route("/")
 def landing():
-    return render_template('landing.html')
+    if current_user:
+        return redirect(url_for('nonauth.home'))
+    else:
+        return render_template('landing.html')
 
 @main.route('/profile', methods=["GET"])
 @login_required
