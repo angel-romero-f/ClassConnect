@@ -39,6 +39,7 @@ def signup_post():
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
+    role = request.form.get('role')
     #role = request.form.get('role')  # Get the selected role from the form
 
     # Check if the email already exists in the database
@@ -49,7 +50,7 @@ def signup_post():
 
     # Hash the password
     hashed_password = generate_password_hash(password, "pbkdf2")
-    new_user = User(email=email, name=name, password=hashed_password, fs_uniquifier=email,active=True)
+    new_user = User(email=email, name=name, password=hashed_password, fs_uniquifier=email,active=True, roles = role)
     # Add the new user to the database
     db.session.add(new_user)
     db.session.commit()
