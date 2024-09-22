@@ -6,11 +6,11 @@ from . import db
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/login')
+@auth.route('/user_login')
 def login():
     return render_template('login.html')
 
-@auth.route('/login', methods=['POST'])
+@auth.route('/user_login', methods=['POST'])
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
