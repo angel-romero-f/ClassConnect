@@ -12,111 +12,69 @@ body {
     max-width: 960px; /* Centered container with a max-width */
   }
   
-.custom_container{
-  background-color: #2e395d;
-  color: white;
-  padding: 2rem;
-  border-radius: .75rem;
+/* Container for both announcement bars */
+.announcements-container {
   display: flex;
-  flex-direction: column;
-  z-index: 1;
+  flex-direction: row; /*Set the bars horizontally */
+  gap: 20px; /* Space between the bars */
+  justify-content: space-between; /* Add space between the bars */
+  max-width: 1200px; /* Set a maximum width for the container */
+  margin: 0 auto; /* Center the container horizontally */
 }
 
-.h1_custom {
-  color: white;
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+/* Style for each announcement bar */
+.announcements-bar {
+  background-color: #f9f9f9;
+  padding: 50px;
+  border-radius: 8px;
 }
 
-.announcements {
-  max-width: 450px;
-
+/* Headings for the announcement bars */
+.announcements-bar h2 {
+  margin-bottom: 20px;
 }
 
+/* Individual announcement items */
 .announcement-item {
-  background-color: #202a47;
-  color: white;
-  padding: 1rem 1.25rem;
-  display: grid;
-  grid-template-columns: 80% 20%;
-  row-gap: 10px;
-  position: relative;
-  border-radius: 0.5rem;
+  background-color: #ffffff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
 }
 
-.announcement-item.hide{
-  display: none;
+/* Title of each announcement */
+.announcement-item h3 {
+  margin-top: 0;
 }
 
-.announcement-item h2{
-  color: white;
-  font-size: 1.15rem;
-}
-
-.announcement-item .dots{
-  cursor: pointer;
-  color: #7984ab;
-  font-size: 2rem;
-  font-weight: bold;
-  position: absolute;
-  top: -5px;
-  right: 25px;
-}
-
-.announcement-item .avatar-info{
-  grid-column: 1 / 2; 
+/* Additional information about the announcement */
+.announcement-info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
-.announcement-item .avatar-info img{
+/* Avatar and author information */
+.avatar-info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-info img {
   width: 40px;
   height: 40px;
-  border: 3px solid #8893bc;
   border-radius: 50%;
+  margin-right: 10px;
 }
 
-.announcement-item .avatar-info .avatar-name {
-  color:#8893bc;
-  font-size: .9rem;
-  font-weight:bold;
-}
-
-.announcement-item .announcement-time {
-  color: #7984ab;
-  font-size: .9rem;
-}
-
-button {
-  color:#ffffff;
-  cursor: pointer;
-  background-color: #4a9bff;
+.avatar-name {
   font-weight: bold;
-  padding: .75rem 2rem;
-  width: max-content;
-  align-self: center;
-  border-radius: .25rem;
-  border: 0;
 }
 
-button:hover{
-  background-color: #6eafff;
-}
-
-#dismiss-all-btn{
-  margin-top: 12rem;
-}
-
-#dismiss-all-btn.hide{
-  display:none;
-}
-
-#reset-btn{
-  display: none;
-}
-
-#reset-btn.show{
-  display: block;
-  margin-top: 6rem;
+/* Time of the announcement */
+.announcements-time {
+  font-size: 0.9em;
+  color: #888;
 }
