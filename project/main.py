@@ -6,7 +6,7 @@ main = Blueprint('main', __name__)
 
 @main.route("/")
 def landing():
-    if current_user:
+    if current_user.is_authenticated:
         return redirect(url_for('nonauth.home'))
     else:
         return render_template('landing.html')
