@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from flask_login import login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User
+from .models import User, Role
 from . import db
 
 auth = Blueprint('auth', __name__)
@@ -39,7 +39,7 @@ def signup_post():
     email = request.form.get('email')
     name = request.form.get('name')
     password = request.form.get('password')
-    role = request.form.get('role')
+    role_name = request.form.get('role')
     #role = request.form.get('role')  # Get the selected role from the form
 
     # Check if the email already exists in the database
@@ -47,7 +47,10 @@ def signup_post():
     if user:
         flash('Email address already exists')
         return redirect(url_for('auth.signup'))
-
+    role = Role.query.filter_by(name=role_name).first()
+    if not role:
+        flash(f"Role '{role_name}' does not exist.")
+        return redirect(url_for('auth.signup'))
     # Hash the password
     hashed_password = generate_password_hash(password, "pbkdf2")
     new_user = User(email=email, name=name, password=hashed_password, fs_uniquifier=email,active=True, roles = role)
